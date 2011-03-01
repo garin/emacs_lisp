@@ -1,0 +1,62 @@
+;; anything
+(require 'anything)
+(require 'anything-config)
+
+;; 実行コマンド
+(global-set-key "\C-xb" 'anything)
+(global-set-key "\C-x\C-b" 'anything)
+
+(define-key anything-map (kbd "C-p") 'anything-previous-line)
+(define-key anything-map (kbd "C-n") 'anything-next-line)
+(define-key anything-map (kbd "C-v") 'anything-next-source)
+(define-key anything-map (kbd "M-v") 'anything-previous-source)
+
+;; 新規ウィンドウを作成しない
+(setq anything-samewindow t)
+
+;; anything-config.elが追随するまでは自分で設定しておく
+;(define-key anything-map "\C-\M-v" 'anything-scroll-other-window)
+;(define-key anything-map "\C-\M-y" 'anything-scroll-other-window-down)
+;(define-key anything-map "\C-z" 'anything-execute-persistent-action)
+;; これらを設定すると矢印キーとあわせて右手で操作できる
+;(define-key anything-map [end] 'anything-scroll-other-window)
+;(define-key anything-map [home] 'anything-scroll-other-window-down)
+;(define-key anything-map [next] 'anything-next-page)
+;(define-key anything-map [prior] 'anything-previous-page)
+;(define-key anything-map [delete] 'anything-execute-persistent-action)
+;;
+(require 'anything-config)
+
+
+;; --- kill-ring
+;;kill-ring の最大値. デフォルトは 30.
+(setq kill-ring-max 20)
+;;anything で対象とするkill-ring の要素の長さの最小値.
+;;デフォルトは 10.
+;(setq anything-kill-ring-threshold 5)
+;(global-set-key "\M-y" 'anything-show-kill-ring)
+
+
+;; etags
+;; http://www.emacswiki.org/cgi-bin/emacs/download/anything-etags.el
+;(require 'anything-etags)
+;(setq anything-etags-enable-tag-file-dir-cache t)
+;(setq anything-etags-cache-tag-file-dir "~/MyEmacs/")
+
+
+;; --- 検索対象
+;; anything-c-moccur等のanythingアプリケーションのみ使う場合は
+;; anything-sourcesの設定はしなくてもよいが…
+(setq anything-sources
+      (list anything-c-source-buffers
+            anything-c-source-bookmarks
+            anything-c-source-file-name-history
+            anything-c-source-locate
+;            anything-c-source-man-pages
+;            anything-c-source-info-pages
+;            anything-c-source-plocate
+;             anything-etags-c-source-etags-select
+            anything-c-source-calculation-result))
+
+
+
